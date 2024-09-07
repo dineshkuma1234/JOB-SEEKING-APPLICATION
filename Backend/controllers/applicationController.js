@@ -6,6 +6,7 @@ import {Job} from '../models/jobSchema.js';
 
 export const postApplication = catchAsyncError(async (req, res, next) => {
     const { role } = req.user;
+    console.log("hello",role);
     if (role === "Employer") {
       return next(
         new ErrorHandler("Employer not allowed to access this resource.", 400)
@@ -34,6 +35,7 @@ export const postApplication = catchAsyncError(async (req, res, next) => {
       );
       return next(new ErrorHandler("Failed to upload Resume to Cloudinary", 500));
     }
+    console.log("hey there",req.body);
     const { name, email, coverLetter, phone, address, jobId } = req.body;
     const applicantID = {
       user: req.user._id,

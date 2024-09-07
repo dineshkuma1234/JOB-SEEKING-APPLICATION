@@ -27,7 +27,7 @@ export const postJob=catchAsyncError(async (req,res,next) => {
     }
     const postedBy=req.user._id;
     const job=await Job({title,description,category,country,city,location,fixedSalary,salaryFrom,salaryTo,postedBy});
-    
+    await job.save();
     res.status(200).json({
         success: true,
         message: "Job posted successfully!",
